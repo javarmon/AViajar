@@ -6,7 +6,13 @@ import java.net.URL;
 
 import javax.xml.namespace.QName;
 
-import com.agency.provider.avianca.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.agency.provider.avianca.AviancaService;
+import com.agency.provider.avianca.IAviancaService;
+import com.agency.util.DomParserUtil;
 import com.agency.util.PropertiesFileUtil;
 
 public class ClientSample {
@@ -30,7 +36,23 @@ public class ClientSample {
 			IAviancaService port1 = service1
 					.getBasicHttpBindingIAviancaService();
 			System.out.println("Call Web Service Operation...");
-			System.out.println("Server said: " + port1.quote());
+			String response = port1.quote();
+			System.out.println("Server said: " + response);
+			
+			Document document = DomParserUtil.getXMLDocumentFromString(response);
+			NodeList items = DomParserUtil.getNodesByTagName(document, "item");
+			int countItems = items.getLength();
+			System.out.println("Empresa: "+DomParserUtil.getNodeValue(document, "empresa"));
+			
+			
+			for (int i = 0; i < countItems; i++) {
+				System.out.println("Item 1: ");
+				System.out.println("ID: " + DomParserUtil.getValueFromLeafNode(items.item(i), "id"));
+				System.out.println("Ciudad: " + DomParserUtil.getValueFromLeafNode(items.item(i), "ciudad"));
+				System.out.println("Dia: " + DomParserUtil.getValueFromLeafNode(items.item(i), "dia"));
+				System.out.println("Costo: " + DomParserUtil.getValueFromLeafNode(items.item(i), "costo"));
+			}
+			
 			// System.out.println("Server said: " + port1.reserve(null));
 			// //Please input the parameters instead of 'null' for the upper
 			// method!

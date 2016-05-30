@@ -33,11 +33,7 @@ public class ResultModel {
 	 * Product Cost in a purchase
 	 */
 	private double purchaseCost;
-	
-	/**
-	 * Product Cost in a devolution
-	 */
-	private double devolutionCost;
+
 
 	/**
 	 * New instance of the result model
@@ -50,15 +46,13 @@ public class ResultModel {
 	 * @param devolutionCost
 	 */
 	public ResultModel(ProductModel product, int reserveProductId,
-			boolean available, String companyName, double purchaseCost,
-			double devolutionCost) {
+			boolean available, String companyName, double purchaseCost) {
 		super();
 		this.product = product;
 		this.reserveProductId = reserveProductId;
 		this.available = available;
 		this.companyName = companyName;
 		this.purchaseCost = purchaseCost;
-		this.devolutionCost = devolutionCost;
 	}
 
 	/**
@@ -130,21 +124,4 @@ public class ResultModel {
 	public void setPurchaseCost(double purchaseCost) {
 		this.purchaseCost = purchaseCost;
 	}
-
-	/**
-	 * @return the devolutionCost
-	 */
-	public double getDevolutionCost() {
-		return devolutionCost;
-	}
-
-	/**
-	 * @param devolutionCost the devolutionCost to set
-	 */
-	public void setDevolutionCost(double devolutionCost) {
-		this.devolutionCost = devolutionCost;
-	}
-	
-	
-
 }
